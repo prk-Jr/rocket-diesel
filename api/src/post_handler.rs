@@ -8,6 +8,7 @@ use application::post;
 
 #[post("/users", format = "json", data = "<new_user>")]
 pub fn create_user_handler(new_user: Json<NewUser>) -> Result<Json<Response>, Status> {
+    user::read::get_user_by_username(&new_user.username).map_err(|_| Status::AlreadyReported)?;
     let user = user::create::create_user(new_user.into_inner()).map_err(|_| Status::InternalServerError)?;
     let response = Response { body: ResponseBody::User(user) };
     Ok(Json(response))

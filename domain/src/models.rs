@@ -47,7 +47,7 @@ pub struct NewPostTag {
 #[derive(Deserialize)]
 #[serde(crate = "rocket::serde")]
 pub struct CreatePostRequest {
-    pub created_by: Option<i32>,
+    pub created_by: i32,
     pub title: String,
     pub body: String,
     pub tags: Vec<String>,

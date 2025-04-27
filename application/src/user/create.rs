@@ -1,5 +1,4 @@
 use domain::models::{User, NewUser};
-use shared::response_models::{Response, ResponseBody};
 use infrastructure::establish_connection;
 use diesel::prelude::*;
 

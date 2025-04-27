@@ -7,7 +7,7 @@ pub fn create_post(request: CreatePostRequest) -> Result<PostResponse, Box<dyn s
     use domain::schema::{posts, posts_tags, users};
     let mut conn = establish_connection();
     let new_post = NewPost {
-        created_by: request.created_by,
+        created_by: Some(request.created_by),
         title: request.title,
         body: request.body,
     };
