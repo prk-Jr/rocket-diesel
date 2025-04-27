@@ -1,10 +1,19 @@
-use diesel::pg::PgConnection;
-use diesel::prelude::*;
-use dotenvy::dotenv;
-use std::env;
+#[cfg(feature = "postgresql")]
+pub mod pg;
 
-pub fn establish_connection() -> PgConnection {
-    dotenv().ok();
-    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set.");
-    PgConnection::establish(&database_url).unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
-}
+#[cfg(test)]
+pub mod test_utils;
+
+#[cfg(feature = "postgresql")]
+pub use pg::*;
+
+#[cfg(test)]
+pub use test_utils::*;
+
+/// Always export a `establish_connection_pool()`
+/// that uses the correct backend depending on context.
+#[cfg(not(test))]
+pub use pg::establish_connection_pool;
+
+#[cfg(test)]
+pub use test_utils::establish_connection_pool;

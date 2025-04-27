@@ -3,6 +3,20 @@ name = "infrastructure"
 version = "0.1.0"
 edition = "2021"
 
+# [dependencies]
+# diesel = { version = "2.0.0", features = ["postgres", "r2d2"] }
+# dotenvy = "0.15"
+# r2d2 = "0.8"
+
 [dependencies]
-diesel = { version = "2.0.0", features = ["postgres"] }
+diesel = { version = "2.0.0", default-features = false }
 dotenvy = "0.15"
+r2d2 = "0.8"
+
+[features]
+default = ["postgresql"]
+postgresql = ["diesel/postgres", "diesel/r2d2"]
+sqlite = ["diesel/sqlite"]
+
+[dev-dependencies]
+diesel = { version = "2.0.0", features = ["sqlite"] }

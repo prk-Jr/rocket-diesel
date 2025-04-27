@@ -32,7 +32,7 @@ pub struct Post {
 #[derive(Insertable)]
 #[diesel(table_name = posts)]
 pub struct NewPost {
-    pub created_by: Option<i32>,
+    pub created_by: i32,
     pub title: String,
     pub body: String,
 }
