@@ -1,0 +1,20 @@
+version: '3'
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: blog_api
+    ports:
+      - "5432:5432"
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      ROCKET_ADDRESS: 0.0.0.0
+      ROCKET_PORT: 8000
+      DATABASE_URL: postgres://username:password@db/blog_api
+    depends_on:
+      - db
