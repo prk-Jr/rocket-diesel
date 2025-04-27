@@ -1,4 +1,4 @@
-use domain::models::{Post, User};
+use domain::models::User;
 use rocket::serde::Serialize;
 
 #[derive(Serialize)]

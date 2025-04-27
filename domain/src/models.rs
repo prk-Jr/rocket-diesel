@@ -2,7 +2,7 @@ use crate::schema::{users, posts, posts_tags};
 use diesel::prelude::*;
 use rocket::serde::{Deserialize, Serialize};
 
-#[derive(Queryable, Serialize, Identifiable)]
+#[derive(Queryable, QueryableByName, Serialize, Identifiable)]
 #[diesel(table_name = users)]
 pub struct User {
     pub id: i32,
@@ -20,7 +20,7 @@ pub struct NewUser {
     pub last_name: String,
 }
 
-#[derive(Queryable, Serialize, Identifiable)]
+#[derive(Queryable, QueryableByName, Serialize, Identifiable)]
 #[diesel(table_name = posts)]
 pub struct Post {
     pub id: i32,
